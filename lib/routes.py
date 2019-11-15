@@ -86,4 +86,4 @@ def check_rate_limit(request):
         LogEntry.sent_at > (datetime.datetime.now() - datetime.timedelta(hours=24))
     ).count()
     LogEntry.create(sender_ip=ip)
-    return num_requests < 4
+    return num_requests < 24
