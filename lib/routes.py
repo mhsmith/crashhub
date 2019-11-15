@@ -51,7 +51,7 @@ def store_crash(request):
             "status": "skip",
             "location": None
         }
-    crash = json.loads(request.data)
+    crash = json.loads(request.data.decode("UTF-8"))
     # Give Windows paths forward slashes
     crash["id"]["file"] = crash["id"]["file"].replace("\\", "/")
     # We only care about the file name
