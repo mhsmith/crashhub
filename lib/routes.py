@@ -52,10 +52,18 @@ def store_crash(request):
             "location": None
         }
     crash = json.loads(request.data.decode("UTF-8"))
+
     # Give Windows paths forward slashes
     crash["id"]["file"] = crash["id"]["file"].replace("\\", "/")
+
     # We only care about the file name
     crash["id"]["file"] = os.path.split(crash["id"]["file"])[1]
+
+    # Store null fields as an empty string
+    for key, value in crash.items():
+        if value is None:
+            crash[key] = ""
+
     kind, created = CrashKind.get_or_create(**crash["id"])
     del crash["id"]
     crash["kind_id"] = kind.id
