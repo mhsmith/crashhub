@@ -2,7 +2,8 @@ import datetime
 import json
 import os
 
-from flask import Flask, request, escape
+from flask import Flask, request
+from markupsafe import escape
 from peewee import OperationalError
 
 from lib import issues, github, config
